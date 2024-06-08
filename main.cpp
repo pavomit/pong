@@ -26,7 +26,9 @@ int main()
 
 	//++++++++++++++++++++++++  Ball ++++++++++++++++++++++++++++
 	sf::CircleShape ball(10);
-	ball.setPosition(sf::Vector2f(windowSize.x / 2, windowSize.y / 2));
+	sf::Vector2f ballInitialPos(windowSize.x / 2, windowSize.y / 2);
+	ball.setPosition(ballInitialPos);
+	sf::Vector2f ballVelocity(8, 2);
 
 	//++++++++++++++++++++++++  game loop +++++++++++++++++++++++++++
 	while (window.isOpen()) {
@@ -39,16 +41,16 @@ int main()
 
 			//basic movement for both players (W | S for Left Player - up | Down for right player)
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-				rightPlayer.move(sf::Vector2f(0, -10));
+				rightPlayer.move(sf::Vector2f(0, -20));
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-				rightPlayer.move(sf::Vector2f(0, 10));
+				rightPlayer.move(sf::Vector2f(0, 20));
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-				leftPlayer.move(sf::Vector2f(0, -10));
+				leftPlayer.move(sf::Vector2f(0, -20));
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-				leftPlayer.move(sf::Vector2f(0, 10));
+				leftPlayer.move(sf::Vector2f(0, 20));
 			}
 
 		}
@@ -70,6 +72,31 @@ int main()
 			rightPlayer.setPosition(sf::Vector2f(windowSize.x - playerSize.x / 2, windowSize.y - playerSize.y));
 		}
 
+		//+++++++++++++++++++++++++++ ball movement +++++++++++++++++++++++++++++++++s
+		ball.move(ballVelocity);
+
+		//+++++++++++++++++++++++++ collision detection +++++++++++++++++++++++
+
+		// check for ball collision with players 
+		if (ball.getGlobalBounds().intersects(rightPlayer.getGlobalBounds())) {
+			ballVelocity.x = -ballVelocity.x;
+			ball.move(ballVelocity);
+		}
+		if (ball.getGlobalBounds().intersects(leftPlayer.getGlobalBounds())) {
+			ballVelocity.x = -ballVelocity.x;
+			ball.move(ballVelocity);
+		}
+
+		// Check for window collision
+		if (ball.getPosition().x < 0 || ball.getPosition().x + ball.getGlobalBounds().width > windowSize.x) {
+			// Reverse horizontal velocity
+			ballVelocity.x = -ballVelocity.x;
+			ball.setPosition(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
+		}
+		if (ball.getPosition().y < 0 || ball.getPosition().y + ball.getGlobalBounds().height > windowSize.y) {
+			// Reverse vertical velocity
+			ballVelocity.y = -ballVelocity.y;
+		}
 
 
 		window.clear();

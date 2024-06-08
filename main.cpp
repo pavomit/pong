@@ -15,13 +15,11 @@ int main()
 	sf::Vector2f playerSize = leftPlayer.getSize();
 	leftPlayer.setFillColor(sf::Color(255, 229, 180));
 	leftPlayer.setPosition(-playerSize.x / 2, windowSize.y / 2 - playerSize.y / 2);
-	//leftPlayer.setOrigin(sf::Vector2f(playerSize.x / 2, playerSize.y / 2));
 
 	//Right Player
 	sf::RectangleShape rightPlayer(sf::Vector2f(20, 100));
 	rightPlayer.setFillColor(sf::Color(255, 229, 180));
 	rightPlayer.setPosition(windowSize.x - playerSize.x / 2, windowSize.y / 2 - playerSize.y / 2);
-	//rightPlayer.setOrigin(sf::Vector2f(playerSize.x / 2, playerSize.y / 2));
 
 
 	//++++++++++++++++++++++++  Ball ++++++++++++++++++++++++++++
@@ -29,6 +27,11 @@ int main()
 	sf::Vector2f ballInitialPos(windowSize.x / 2, windowSize.y / 2);
 	ball.setPosition(ballInitialPos);
 	sf::Vector2f ballVelocity(8, 2);
+
+	// ++++++++++++++++++++++++ screen line +++++++++++++++++++++++++++++
+	sf::RectangleShape line(sf::Vector2f(2,windowSize.y));
+	line.setPosition(windowSize.x / 2 - 10, 0);
+	line.setFillColor(sf::Color(255, 229, 150));
 
 	//++++++++++++++++++++++++  game loop +++++++++++++++++++++++++++
 	while (window.isOpen()) {
@@ -90,7 +93,7 @@ int main()
 		// Check for window collision
 		if (ball.getPosition().x < 0 || ball.getPosition().x + ball.getGlobalBounds().width > windowSize.x) {
 			// Reverse horizontal velocity
-			ballVelocity.x = -ballVelocity.x;
+			//ballVelocity.x = -ballVelocity.x;
 			ball.setPosition(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
 		}
 		if (ball.getPosition().y < 0 || ball.getPosition().y + ball.getGlobalBounds().height > windowSize.y) {
@@ -102,6 +105,7 @@ int main()
 		window.clear();
 		window.draw(leftPlayer);
 		window.draw(rightPlayer);
+		window.draw(line);
 		window.draw(ball);
 		window.display();
 	}

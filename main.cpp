@@ -134,14 +134,35 @@ int main()
 			ballVelocity.y = -ballVelocity.y;
 		}
 
-		window.clear();
-		window.draw(leftPlayer);
-		window.draw(rightPlayer);
-		window.draw(line);
-		window.draw(ball);
-		window.draw(lScore);
-		window.draw(rScore);
-		window.display();
+		if (rightVal != 10 && leftVal != 10) {
+			window.clear();
+			window.draw(leftPlayer);
+			window.draw(rightPlayer);
+			window.draw(line);
+			window.draw(ball);
+			window.draw(lScore);
+			window.draw(rScore);
+			window.display();
+		}
+		else if (rightVal >= 10) {
+			sf::Text winText;
+			winText.setFont(font);
+			winText.setString("Right Player  Won");
+			winText.setPosition(windowSize.x / 2 - (winText.getGlobalBounds().width / 2), 50);
+			window.clear(sf::Color::Black);
+			window.draw(winText);
+			window.display();
+		}
+		else if (leftVal >= 10) {
+			sf::Text winText;
+			winText.setFont(font);
+			winText.setString("Left Player  Won");
+			winText.setPosition(windowSize.x / 2 - (winText.getGlobalBounds().width / 2), 50);
+			window.clear(sf::Color::Black);
+			window.draw(winText);
+			window.display();
+		}
+		
 	}
 
 	return 0;

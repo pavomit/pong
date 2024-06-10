@@ -148,7 +148,7 @@ int main()
 			sf::Text winText;
 			winText.setFont(font);
 			winText.setString("Right Player  Won");
-			winText.setPosition(windowSize.x / 2 - (winText.getGlobalBounds().width / 2), 50);
+			winText.setPosition(windowSize.x / 2 - (winText.getGlobalBounds().width / 2), windowSize.y / 2 - winText.getGlobalBounds().height / 2);
 			window.clear(sf::Color::Black);
 			window.draw(winText);
 			window.display();
@@ -157,7 +157,7 @@ int main()
 			sf::Text winText;
 			winText.setFont(font);
 			winText.setString("Left Player  Won");
-			winText.setPosition(windowSize.x / 2 - (winText.getGlobalBounds().width / 2), 50);
+			winText.setPosition(windowSize.x / 2 - (winText.getGlobalBounds().width / 2), windowSize.y / 2 - winText.getGlobalBounds().height / 2);
 			window.clear(sf::Color::Black);
 			window.draw(winText);
 			window.display();

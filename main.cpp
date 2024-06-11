@@ -144,7 +144,7 @@ int main()
 			window.draw(rScore);
 			window.display();
 		}
-		else if (rightVal >= 10) {
+		else if (rightVal == 10) {
 			sf::Text winText;
 			winText.setFont(font);
 			winText.setString("Right Player  Won");
@@ -152,8 +152,19 @@ int main()
 			window.clear(sf::Color::Black);
 			window.draw(winText);
 			window.display();
+			// Reset scores
+			rightVal = 0;
+			leftVal = 0;
+			lScore.setString(std::to_string(leftVal));
+			rScore.setString(std::to_string(rightVal));
+			
+			//restart the game and reset players positions 
+			ball.setPosition(ballInitialPos);
+			ballVelocity = sf::Vector2f(8, 2);
+			leftPlayer.setPosition(-playerSize.x / 2, windowSize.y / 2 - playerSize.y / 2);
+			rightPlayer.setPosition(windowSize.x - playerSize.x / 2, windowSize.y / 2 - playerSize.y / 2);
 		}
-		else if (leftVal >= 10) {
+		else if (leftVal == 10) {
 			sf::Text winText;
 			winText.setFont(font);
 			winText.setString("Left Player  Won");
@@ -161,6 +172,17 @@ int main()
 			window.clear(sf::Color::Black);
 			window.draw(winText);
 			window.display();
+			// Reset scores
+			rightVal = 0;
+			leftVal = 0;
+			lScore.setString(std::to_string(leftVal));
+			rScore.setString(std::to_string(rightVal));
+
+			//restart the game and reset players positions 
+			ball.setPosition(ballInitialPos);
+			ballVelocity = sf::Vector2f(8, 2);
+			leftPlayer.setPosition(-playerSize.x / 2, windowSize.y / 2 - playerSize.y / 2);
+			rightPlayer.setPosition(windowSize.x - playerSize.x / 2, windowSize.y / 2 - playerSize.y / 2);
 		}
 		
 	}

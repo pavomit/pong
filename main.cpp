@@ -1,5 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <chrono>
+#include <thread>
 
 int main()
 {
@@ -152,6 +154,7 @@ int main()
 			window.clear(sf::Color::Black);
 			window.draw(winText);
 			window.display();
+			std::this_thread::sleep_for(std::chrono::seconds(3));
 			// Reset scores
 			rightVal = 0;
 			leftVal = 0;
@@ -172,6 +175,7 @@ int main()
 			window.clear(sf::Color::Black);
 			window.draw(winText);
 			window.display();
+			std::this_thread::sleep_for(std::chrono::seconds(3));
 			// Reset scores
 			rightVal = 0;
 			leftVal = 0;
